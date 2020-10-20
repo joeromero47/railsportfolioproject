@@ -1,0 +1,8 @@
+<ul>
+  <% @ratings.each do |rating|%>
+    <li>
+      <%= link_to rating.game.title, games_path(rating) %> -
+      <%= rating.game.title %> 
+    </li>
+  <% end %>
+</ul>

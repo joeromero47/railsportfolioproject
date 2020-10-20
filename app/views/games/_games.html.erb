@@ -1,0 +1,6 @@
+<% games.each do |game| %>
+  <p><%= link_to game.title, game_path(game) %> -
+    <%= game.genre%> -
+    reviewer: <%= game.user.try(:name) %> -
+    score: <%= game.rating.try(:score) %></p>
+<% end %>

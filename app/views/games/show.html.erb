@@ -1,0 +1,8 @@
+<p> <%= @game.title %> is a <%= @game.genre%> game. </p>
+
+<p><%= @game.title %> - <%= @game.rating.score %></p>
+
+<% if @game.user == current_user %>
+  <%= link_to "Edit game", edit_game_path(@game) %>
+  <%= link_to "Delete game", game_path(@game), method: :delete  %>
+<% end %>

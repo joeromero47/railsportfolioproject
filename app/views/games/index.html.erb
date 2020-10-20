@@ -1,0 +1,26 @@
+<h1>Your Games!</h1>
+
+<%= link_to "Sort games by ratings", ratings_path, id: "5", class: "index-link" %>
+
+
+
+<h3><%= @rpgs.load.size %> RPGs:</h3>
+<%= render 'games', games: @rpgs%>
+
+
+<h3><%= @platformers.load.size %> Platformers:</h3>
+<%= render 'games', games: @platformers%>
+
+
+<h3><%= @action.load.size %> Action games:</h3>
+<%= render 'games', games: @action%>
+
+<div>
+<%=  link_to "Add a Game", new_game_path %>
+</div>
+
+
+
+
+
+

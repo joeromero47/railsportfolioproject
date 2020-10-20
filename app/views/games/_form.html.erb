@@ -1,0 +1,19 @@
+<%= form_for(@game) do |f| %>
+
+  <%= render partial: 'layouts/errors', locals: {object: @game} %>
+
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+
+  <%= f.label :genre %>
+  <%= f.select(:genre, [ "Action", "RPG", "Platformer" ]) %>
+
+  <br><br>
+  <%= f.label :rating_id, "Select a rating" %>
+  <%= f.collection_select :rating_id, Rating.all, :id, :score, prompt: true %>
+  <br><br>
+
+  <%= f.submit %>
+
+<% end %>
