@@ -13,6 +13,19 @@ class Game < ApplicationRecord
     self.rating = rating if rating.valid? || !self.rating
  end
 
+
+ def self.action_genre
+  Game.where(genre: "Action") #&& session[:id] == current_user.params[:id]
+ end 
+
+ def rpg_genre
+   games.where(genre: "RPG")
+ end
+
+ def platformer_genre
+   games.where(genre: "Platformer")
+ end 
+
  scope :order_by_genre, -> {order(:genre)}
  scope :rpgs, -> {where(genre: "RPG")}
  scope :platformers, -> {where(genre: "Platformer")}

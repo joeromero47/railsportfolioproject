@@ -1,19 +1,15 @@
-<h1>Your Games!</h1>
+<h1>Welcome to your main page!</h1>
 
-<%= link_to "Sort games by ratings", ratings_path, id: "5", class: "index-link" %>
+<h2>Sort games by ratings</h2>
+<% @ratings.each do |rating| %>
+  <p><%= link_to rating.score, rating_path(rating) %> 
+<% end %>
+<div>
+</div>
 
+<h3><% @games %> Your games:</h3>
+<%= render 'games', games: @games%>
 
-
-<h3><%= @rpgs.load.size %> RPGs:</h3>
-<%= render 'games', games: @rpgs%>
-
-
-<h3><%= @platformers.load.size %> Platformers:</h3>
-<%= render 'games', games: @platformers%>
-
-
-<h3><%= @action.load.size %> Action games:</h3>
-<%= render 'games', games: @action%>
 
 <div>
 <%=  link_to "Add a Game", new_game_path %>

@@ -1,4 +1,4 @@
-<% games.each do |game| %>
+<% @games.each do |game| %>
   <p><%= link_to game.title, game_path(game) %> -
     <%= game.genre%> -
     reviewer: <%= game.user.try(:name) %> -

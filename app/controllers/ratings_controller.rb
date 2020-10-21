@@ -1,15 +1,21 @@
+require 'pry'
 class RatingsController < ApplicationController
 
   def index
-    @ratings = Rating.all
+    @ratings = Rating.find_by_id(params[:id])
   end
 
   def show
-    if params[:id] && rating = Game.find_by(params[:rating_id])
-      @ratings = Game.all
-      render :show
-    else 
-      render :index
-    end 
+    @ratings = current_user.games.where(params[:id] == :rating_id)
+    binding.pry
+    #current_user.ratings.where()
+    render :show
   end
+
+  private
+
+  def set_games
+    @games = current_user.games.find_by_id(params[:id])
+  end 
 end
+

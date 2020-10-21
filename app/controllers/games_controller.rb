@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :check_for_logged_in, except: [:index]
+  before_action :check_for_logged_in
 
   def new
     #check if it's nested & it's a proper id
@@ -24,20 +24,23 @@ class GamesController < ApplicationController
   end
 
   def index
+    @ratings = Rating.all
     if params[:rating_id] && rating = Rating.find_by_id(params[:rating_id])
       #nested route
-      @games = rating.games
-    else
-       if params[:genre]
-          @games = Game.search_by_genre(params[:genre]).order_by_genre.includes(:rating,:user)
-          @games = Game.order_by_genre if @games == []
-        else
-          @games = Game.includes(:rating,:user).order_by_genre
-          @rpgs = @games.rpgs
-          @platformers = @games.platformers
-          @action = @games.action
+      @games = current_user.games
+    elsif 
+       #if params[:genre]
+        #  @games = Game.search_by_genre(params[:genre]).order_by_genre.includes(:rating,:user)
+         # @games = Game.order_by_genre if @games == []
+      
+          #@games = Game.includes(:rating,:user).order_by_genre
+          #@action = Game.action_genre
+          #@platformers = @games.platformers
+          #@action = @games.action
+        @games = current_user.games
+          render :index
         end
-    end
+
   end
 
   def show
