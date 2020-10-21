@@ -1,3 +1,4 @@
+require 'pry'
 class GamesController < ApplicationController
   before_action :check_for_logged_in
 
@@ -27,7 +28,7 @@ class GamesController < ApplicationController
     @ratings = Rating.all
     if params[:rating_id] && rating = Rating.find_by_id(params[:rating_id])
       #nested route
-      @games = current_user.games
+      @games = current_user.games.order_by_title
     elsif 
        #if params[:genre]
         #  @games = Game.search_by_genre(params[:genre]).order_by_genre.includes(:rating,:user)
@@ -37,19 +38,25 @@ class GamesController < ApplicationController
           #@action = Game.action_genre
           #@platformers = @games.platformers
           #@action = @games.action
-        @games = current_user.games
+        @games = current_user.games.most_recent(5)
           render :index
         end
 
   end
 
   def show
-   set_game
+   if params[:rating_id]
+    @game = Game.find_by(id: params[:rating_id])
+    #binding.pry
+   else
+    set_game
+   end
 
   end
 
   def edit
     set_game
+    #binding.pry
   end
 
   def update
@@ -72,6 +79,7 @@ class GamesController < ApplicationController
 
   def set_game
     @game = Game.find_by(id: params[:id])
+    #binding.pry
     if !@game
       redirect_to games_path
     end 
