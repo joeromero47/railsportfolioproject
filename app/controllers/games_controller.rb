@@ -28,20 +28,11 @@ class GamesController < ApplicationController
     @ratings = Rating.all
     if params[:rating_id] && rating = Rating.find_by_id(params[:rating_id])
       #nested route
-      @games = current_user.games.order_by_title
+      @games = current_user.games
     elsif 
-       #if params[:genre]
-        #  @games = Game.search_by_genre(params[:genre]).order_by_genre.includes(:rating,:user)
-         # @games = Game.order_by_genre if @games == []
-      
-          #@games = Game.includes(:rating,:user).order_by_genre
-          #@action = Game.action_genre
-          #@platformers = @games.platformers
-          #@action = @games.action
         @games = current_user.games.most_recent(5)
           render :index
         end
-
   end
 
   def show
@@ -56,7 +47,6 @@ class GamesController < ApplicationController
 
   def edit
     set_game
-    #binding.pry
   end
 
   def update

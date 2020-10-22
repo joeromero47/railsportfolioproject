@@ -13,9 +13,5 @@ class RatingsController < ApplicationController
   end
 
   private
-
-  def set_games
-    @games = current_user.games.find_by_id(params[:id])
-  end 
 end
 
