@@ -3,7 +3,7 @@ class RatingsController < ApplicationController
   before_action :check_for_logged_in
 
   def index
-    @ratings = Rating.find_by_id(params[:id])
+    @ratings = Rating.all
   end
 
   def show

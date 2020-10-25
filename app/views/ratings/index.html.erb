@@ -1,8 +1,8 @@
+Click a rating to organize your games by rating!
 <ul>
   <% @ratings.each do |rating|%>
     <li>
-      <%= link_to rating.score, rating_path(rating) %> -
-      <%= rating.score %> 
+      <%= link_to rating.score, rating_games_path(rating) %> -
     </li>
   <% end %>
 </ul>
